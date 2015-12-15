@@ -15,7 +15,7 @@ def preprocess(words_file = "../tools/word_data.pkl", authors_file="../tools/ema
         this function takes a pre-made list of email texts (by default word_data.pkl)
         and the corresponding authors (by default email_authors.pkl) and performs
         a number of preprocessing steps:
-            -- splits into training/testing sets (10% testing)
+            -- splits into training/testing sets (1% testing)
             -- vectorizes into tfidf matrix
             -- selects/keeps most helpful features
 
@@ -53,7 +53,7 @@ def preprocess(words_file = "../tools/word_data.pkl", authors_file="../tools/ema
 
     ### feature selection, because text is super high dimensional and 
     ### can be really computationally chewy as a result
-    selector = SelectPercentile(f_classif, percentile=10)
+    selector = SelectPercentile(f_classif, percentile=1)
     selector.fit(features_train_transformed, labels_train)
     features_train_transformed = selector.transform(features_train_transformed).toarray()
     features_test_transformed  = selector.transform(features_test_transformed).toarray()
